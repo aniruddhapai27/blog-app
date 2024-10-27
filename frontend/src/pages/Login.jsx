@@ -67,8 +67,8 @@ function Login() {
               className="w-full p-2 mb-4 border rounded-md"
             >
               <option value="">Select Role</option>
-              <option value="user">user</option>
-              <option value="admin">admin</option>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
             </select>
 
             <div className="mb-4">
