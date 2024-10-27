@@ -13,7 +13,7 @@ const cors = require("cors");
 const app = express();
 dotenv.config();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 4001;
 const MONOGO_URL = process.env.MONGO_URL;
 
 //middleware

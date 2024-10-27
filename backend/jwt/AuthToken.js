@@ -3,13 +3,12 @@ const User = require("../models/userModel");
 
 const createTokenAndSaveCookies = async (userId, res) => {
   const token = jwt.sign({ userId }, process.env.JWT_SECRET_KEY, {
-    expiresIn: "30d",
+    expiresIn: "7d",
   });
   res.cookie("jwt", token, {
     httpOnly: true, // Temporarily set to false for testing
-    secure: false,
-    sameSite: "lax",
-    path: "/", // Ensure the cookie is available throughout the site
+    secure: true,
+    sameSite: "none",
   });
   await User.findByIdAndUpdate(userId, { token });
   return token;

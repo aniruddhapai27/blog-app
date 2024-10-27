@@ -64,7 +64,7 @@ function Register() {
       setEducation("");
       setPhoto("");
       setPhotoPreview("");
-      navigateTo("/");
+      navigateTo("/login");
     } catch (error) {
       console.log(error);
       toast.error(

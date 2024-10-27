@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 //Authentication
 exports.isAuthenticated = async (req, res, next) => {
   try {
+    console.log("req: ");
+    console.log(req.cookies);
     const token = req.cookies.jwt;
     console.log("Middleware : ", token);
     if (!token) {
