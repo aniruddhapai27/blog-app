@@ -5,6 +5,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { useAuth } from "../context/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { BACKEND_URL } from "../utils";
 
 function Navbar() {
   const [show, setShow] = useState(false);
@@ -16,10 +17,9 @@ function Navbar() {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get(
-        "http://localhost:4001/api/users/logout",
-        { withCredentials: true }
-      );
+      const { data } = await axios.get(`${BACKEND_URL}/api/users/logout`, {
+        withCredentials: true,
+      });
       console.log(data);
       localStorage.removeItem("jwt"); // deleting token in localStorage so that if user logged out it will goes to login page
       toast.success(data.message);

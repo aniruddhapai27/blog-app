@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthProvider";
 import { BACKEND_URL } from "./utils";
 
 function Login() {
-  const { isAuthenticated, setIsAuthenticated, setProfile } = useAuth();
+  const { setIsAuthenticated, setProfile } = useAuth();
 
   const navigateTo = useNavigate();
   const [email, setEmail] = useState("");
