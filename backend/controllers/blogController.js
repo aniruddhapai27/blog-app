@@ -92,6 +92,40 @@ exports.updateBlog = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ message: "Invalid Blog id" });
   }
+  console.log(req.body);
+  // verify blogImage object contains old cloudinary url or new
+  // 1. old cloudniary url -> direct upadte
+  // 2. new -> parse image and upload it to cloudinary and delete the old image
+
+  // const blog = await Blog.findByIdAndUpdate(id, req.body, { new: true });
+
+  if (!req.files || Object.keys(req.files).length === 0) {
+    // return res.status(400).json({ message: "Blog Image is required" });
+  } else {
+    const { blogImage } = req.files;
+    const allowedFormats = ["image/jpeg", "image/png", "image/webp"];
+    if (!allowedFormats.includes(blogImage.mimetype)) {
+      return res.status(400).json({
+        message: "Invalid photo format. Only jpg and png are allowed",
+      });
+    }
+
+    const cloudinaryResponse = await cloudinary.uploader.upload(
+      blogImage.tempFilePath
+    );
+    if (!cloudinaryResponse || cloudinaryResponse.error) {
+      console.log(cloudinaryResponse.error);
+    }
+
+    req.body.blogImage = {
+      public_id: cloudinaryResponse.public_id,
+      url: cloudinaryResponse.url,
+    };
+
+    // console.log(cloudinaryResponse);
+    console.log(req.body);
+  }
+
   const updatedBlog = await Blog.findByIdAndUpdate(id, req.body, { new: true });
   if (!updatedBlog) {
     return res.status(404).json({ message: "Blog not found" });
