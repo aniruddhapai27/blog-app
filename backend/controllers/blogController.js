@@ -98,6 +98,11 @@ exports.updateBlog = async (req, res) => {
   // 2. new -> parse image and upload it to cloudinary and delete the old image
 
   // const blog = await Blog.findByIdAndUpdate(id, req.body, { new: true });
+  let updateBlog = {
+    title: req.body.title,
+    about: req.body.about,
+    category: req.body.category,
+  };
 
   if (!req.files || Object.keys(req.files).length === 0) {
     // return res.status(400).json({ message: "Blog Image is required" });
@@ -124,9 +129,13 @@ exports.updateBlog = async (req, res) => {
 
     // console.log(cloudinaryResponse);
     console.log(req.body);
+
+    updateBlog.blogImage = req.body.blogImage;
   }
 
-  const updatedBlog = await Blog.findByIdAndUpdate(id, req.body, { new: true });
+  const updatedBlog = await Blog.findByIdAndUpdate(id, updateBlog, {
+    new: true,
+  });
   if (!updatedBlog) {
     return res.status(404).json({ message: "Blog not found" });
   }
