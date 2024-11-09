@@ -109,6 +109,9 @@ function Contact() {
                   <FaMapMarkerAlt className="text-green-500" />
                   <span>Sirsi, Karnataka, India</span>
                 </li>
+                <li className="flex items-center space-x-2">
+                  <span>Share your feedback on using our website!</span>
+                </li>
               </ul>
             </div>
           </div>
