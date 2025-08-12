@@ -8,6 +8,7 @@ You can view the live version of the website here:
 ---
 
 This is a full-stack blog application where users can:
+
 - 📰 Read blogs
 - ✍️ Create and edit their own posts
 - 📷 Upload images with blogs
